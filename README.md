@@ -167,3 +167,24 @@ Below is the code:
             }    
         }  
     }  
+    
+### The process of the evolution
+> First initpopulation, then calculate the fitness and record the best fitness. Second select the best individual. Third intersect and mutate. Repeat those processes until it arrives the maximum generation.Below is the code:
+
+     public void solve() {  
+        readDate();  
+        initPopulation();  
+        for(int i = 0; i < maxgen; i++) {  
+            //calculate the fitness  
+            calcFitness();  
+            //record the best individual 
+            recBest(i); 
+            System.out.println("The"+i+"generation's bestfitness"+"total profit"+evaluate(bestUnit)+"total weight" +evaluateweight(bestUnit));
+            //to select population 
+            select();  
+            //crossover  
+            intersect();  
+           //mutation  
+            aberra();  
+        }  
+    }
