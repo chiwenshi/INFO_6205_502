@@ -247,7 +247,7 @@ public class Knapsack {
             calcFitness();  
             //record the best individual 
             recBest(i); 
-            System.out.println("第"+i+"代最优个体"+"总价格"+evaluate(bestUnit)+"总重量" +evaluateweight(bestUnit));
+            System.out.println("The"+i+"generation's bestfitness"+"total profit"+evaluate(bestUnit)+"total weight" +evaluateweight(bestUnit));
             //to select population 
             select();  
             //crossover  
