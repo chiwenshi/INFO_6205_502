@@ -14,25 +14,25 @@ import java.util.Random;
  * @author 84690
  */
 public class Knapsack {
-    private Random random = null; //随机数生成器  
+    private Random random = null;  
   
-    public float[] weight = null; //物品重量  
-    public float[] profit = null; //物品价值  
-    public int len; // 染色体长度  
+    public float[] weight = null;  //every item has two properties, this is the weight of every item 
+    public float[] profit = null; //the price of every item 
+    public int len; // the length of chromosomes 
   
-    public float capacity; //背包容量  
-    public int scale; //种群规模  
-    public int maxgen; //最大代数  
-    public float irate; //交叉率（所有的个体都需要相互交叉的，这里的交叉率指交叉时每位交叉发生交叉的可能性）  
-    public float arate1; //变异率（某个个体发生变异的可能性）  
-    public float arate2; //对于确定发生变异的个体每位发生变异的可能性  
-    public File data = null; //物品重量和物品价值的数据文件  
+    public float capacity; //the capacity of knapsack  
+    public int scale; //size of the population  
+    public int maxgen; //maximum generation   
+    public float irate; //rate of crossover(this means when crossover happens, the rate of crossover of every digit of gene)  
+    public float arate1; //rate of mutation(rate of mutation of every individual)  
+    public float arate2; //rate of crossover of every digit of gene(for those individuals who is sure to have mutation) 
+    public File data = null; //the file storing the data of items(includes the weight and price of every item)  
   
-    public boolean[][] population = null; //上一代种群  
-    public float[] fitness = null; //种群的适应度  
+    public boolean[][] population = null; //the last generation of the population    
+    public float[] fitness = null; //fitness of the population 
   
-    public float bestFitness; //最优个体的价值  
-    public boolean[] bestUnit = null; //最优个体的物品取舍策略  
+    public float bestFitness; //the price of the item who has the best fitness 
+    public boolean[] bestUnit = null; //the strategy of how to choose the best item    
   
     class SortFitness implements Comparable<SortFitness>{  
         int index;  
@@ -50,13 +50,13 @@ public class Knapsack {
     }  
   
     /** 
-     * @param capacity : 背包容量 
-     * @param scale ： 种群规模 
-     * @param maxgen ： 最大代数 
-     * @param irate ： 交叉率（所有的个体都需要相互交叉的，这里的交叉率指交叉时每位交叉发生交叉的可能性） 
-     * @param arate1 ：变异率（某个个体发生变异的可能性） 
-     * @param arate2 ：对于确定发生变异的个体每位发生变异的可能性 
-     * @param file : 物品重量和物品价值的数据文件 
+     * @param capacity : capacity of the knapsack
+     * @param scale ： size of the population 
+     * @param maxgen ： maximum generation 
+     * @param irate ： rate of crossover(this means when crossover happens, the rate of crossover of every digit of gene) 
+     * @param arate1 ：rate of mutation(rate of mutation of every individual)
+     * @param arate2 ：rate of crossover of every digit of gene(for those individuals who is sure to have mutation)
+     * @param file : the file storing the data of items(includes the weight and price of every item)
      */  
     public Knapsack(float capacity, int scale, int maxgen, float irate, float arate1, float arate2, File data) {  
         this.capacity = capacity;  
@@ -69,7 +69,7 @@ public class Knapsack {
         random = new Random(System.currentTimeMillis());  
     }  
   
-    //读取物品重量和物品价值数据  
+     //read the weight and profit information of every item  
     public void readDate() {  
         List<Object> tmp = Reader.read(data);  
         weight = (float[])tmp.get(0);  
@@ -77,16 +77,16 @@ public class Knapsack {
         len = weight.length;  
     }  
   
-    //初始化初始种群  
+    //initialize the population  
     public void initPopulation() {  
         fitness = new float[scale];  
         population = new boolean[scale][len];  
-        //考虑到随机生成的初始化种群效果有可能不好，这里对于种群的初始化作了一定的优化  
-        //对于每一个个体，先随机一个容量值（0.5 capacity 至 1.5 capacity）  
-        //然后随机相应的物品到该个体中，直到超过上面随机的容量  
+        //Taking the shortcomings of the randomly initialization into account, here we have some optimization
+        //For each individual, randomly generate a capacity value(between 0.5*capacity and 1.5*capacity)
+        //and then randomly put every item into the knapsack until it exceeds the capacity of the knapsack   
         for(int i = 0; i < scale; i++) {  
             float tmp = (float)(0.5 + Math.random()) * capacity;  
-            int count = 0; //防止初始化耗费太多计算资源  
+            int count = 0; //in case of the heavy comsumption of computer resource by initialization   
             for(int j = 0; j < tmp;) {  
                 int k = random.nextInt(len);  
                 if(population[i][k]) {  
@@ -104,7 +104,7 @@ public class Knapsack {
         }  
     }  
   
-    //计算一个个体的适应度  
+   //evaluate the fitness of each individual  
     private float evaluate(boolean[] unit) {  
         float profitSum = 0;  
         float weightSum = 0;  
@@ -115,7 +115,7 @@ public class Knapsack {
             }  
         }  
         if (weightSum > capacity) {  
-            //该个体的对应的所有物品的重量超过了背包的容量  
+            //the weight of all items exceeds the capacity of the knapsack   
             return 0;  
         } else {  
             return profitSum;  
@@ -136,14 +136,14 @@ public class Knapsack {
         }
     } 
   
-    //计算种群所有个体的适应度  
+    //calculate the fitness of each individual in the population  
     public void calcFitness() {  
         for(int i = 0; i < scale; i++) {  
             fitness[i] = evaluate(population[i]);  
         }  
     }  
   
-    //记录最优个体  
+    //to find the best individual which has the best fitness 
     public void recBest(int gen) {  
         for(int i = 0; i < scale; i++) {  
             if(fitness[i] > bestFitness) {  
@@ -156,8 +156,9 @@ public class Knapsack {
         }  
     }  
   
-    //种群个体选择  
-    //选择策略：适应度前10%的个体带到下一次循环中，然后在（随机生成10%的个体 + 剩下的90%个体）中随机取90%出来  
+   //about how to select the best individuals  
+    //selection method: bring the 10% individuals with the best fitness to the next loop, and then
+    //select the 90% of individuals from the newly generated population  
     private void select() {  
         SortFitness[] sortFitness = new SortFitness[scale];  
         for(int i = 0; i < scale; i++) {  
@@ -169,13 +170,13 @@ public class Knapsack {
   
         boolean[][] tmpPopulation = new boolean[scale][len];  
   
-        //保留前10%的个体  
+        //reserve the top 10% individuals with the best fitness  
         int reserve = (int)(scale * 0.1);  
         for(int i = 0; i < reserve; i++) {  
             for(int j = 0; j < len; j++) {  
                 tmpPopulation[i][j] = population[sortFitness[i].index][j];  
             }  
-            //将加入后的个体随机化  
+            //generate individuals randomly  
             for(int j = 0; j < len; j++) {  
                 population[sortFitness[i].index][j] = false;  
             }  
@@ -194,10 +195,10 @@ public class Knapsack {
                     j += weight[k];  
                     count = 0;  
                 }  
-            }//  
+            } 
         }  
   
-        //再随机90%的个体出来  
+        //select 90% of the population  
         List<Integer> list = new ArrayList<Integer>();  
         for(int i = 0; i < scale; i++) {  
             list.add(i);  
@@ -211,7 +212,7 @@ public class Knapsack {
         population = tmpPopulation;  
     }  
   
-    //进行交叉  
+    //crossover  
     private void intersect() {  
         for(int i = 0; i < scale; i = i + 2)  
             for(int j = 0; j < len; j++) {  
@@ -223,7 +224,7 @@ public class Knapsack {
             }  
     }  
   
-    //变异  
+    //mutation  
     private void aberra() {  
         for(int i = 0; i < scale; i++) {  
             if(Math.random() > arate1) {  
@@ -237,34 +238,34 @@ public class Knapsack {
         }  
     }  
       
-    //遗传算法  
+    //Genetic Algorithm  
     public void solve() {  
         readDate();  
         initPopulation();  
         for(int i = 0; i < maxgen; i++) {  
-            //计算种群适应度值  
+            //calculate the fitness  
             calcFitness();  
-            //记录最优个体  
+            //record the best individual 
             recBest(i); 
             System.out.println("第"+i+"代最优个体"+"总价格"+evaluate(bestUnit)+"总重量" +evaluateweight(bestUnit));
-            //进行种群选择  
+            //to select population 
             select();  
-            //进行交叉  
+            //crossover  
             intersect();  
-            //发生变异  
+           //mutation  
             aberra();  
         }  
     }  
       
     public static void main(String[] args) {  
         File data = new File("src/Main/data.txt");  
-        //背包容量  
-        //种群规模  
-        //最大代数  
-        //交叉率（所有的个体都需要相互交叉的，这里的交叉率指交叉时每位交叉发生交叉的可能性）  
-        //变异率（某个个体发生变异的可能性）  
-        //对于确定发生变异的个体每位发生变异的可能性  
-        //物品重量和物品价值的数据文件  
+        //capacity of the knapsack 
+        //size of the population
+        //maximum generation 
+        //rate of crossover(this means when crossover happens, the rate of crossover of every digit of gene)  
+        //rate of mutation(rate of mutation of every individual)  
+        //rate of crossover of every digit of gene(for those individuals who is sure to have mutation) 
+        //the file storing the weight and price information of every item  
         Knapsack gaKnapsack = new Knapsack(2000, 200, 200, 0.5f, 0.05f, 0.1f, data);  
         gaKnapsack.solve();  
     }  
