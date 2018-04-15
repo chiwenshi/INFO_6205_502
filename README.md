@@ -1,1 +1,1 @@
-# genetic-algrothim
+# Knapsack Problem
