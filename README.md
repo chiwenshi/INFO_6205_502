@@ -189,3 +189,7 @@ Below is the code:
     }
 ## UI
 > URL:https://webapp-180415180624.azurewebsites.net/
+
+> You can alert each parameter and view the result from the chart.
+
+> Attention: you shuld click the confirm button twice at first.
