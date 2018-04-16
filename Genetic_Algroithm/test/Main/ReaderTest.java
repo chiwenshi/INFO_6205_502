@@ -39,5 +39,4 @@ public class ReaderTest {
         assertTrue(profit[1]==4.0f);
         assertTrue(profit[2]==6.0f);
     }
-    
 }
