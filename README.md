@@ -3,17 +3,17 @@
 > The knapsack problem is a problem in combinatorial optimization: Given a set of items, each with a weight and a value, determine the number of each item to include in a collection so that the total weight is less than or equal to a given limit and the total weight is less than or equal to a given limit and the total value is as large as possible. In other words, we are trying to fill a fixed-size knapsack with the most valuable items. 
 
 ## Genotype
-> In this problem we use the boolean array as the genotype. The length of the array is the number of the object readed by the project at first. 
+> In this problem we use the boolean array as the genotype. The length of the array is the number of the object read by the project at first. 
 
 ## Phenotype
-> The boolean array represent each object is or not in the bag. For example if the array[0] is true, it means that the first object put into the bag. On the contrary if array[0] is false, it means that the first object doesn't put inot the bag.
+> The boolean array represent each object is or not in the bag. For example, if the array[0] is true, it means that the first object put into the bag. On the contrary, if array[0] is false, it means that the first object doesn't put into the bag.
 
 ## Fintness Fuction
-> According to the knapsack problem, it want to output the max profit of the objects in the bag. So the fitness function is the sum of the object's profit which are in the bag.
+> According to the knapsack problem, it wants to output the max profit of the objects in the bag. So the fitness function is the sum of the object's profit which is in the bag.
 
 ## The logic of the evolution steps
 ### Initpopulation
-> The population is a two-dimensional array. For example population[i][j], i represent it is which individual. In this project we set a parameter called scale to define the size of the population. The rule to generate a population is that generate a individual until the number of the individual equals the scale. The rule to generate a individual is that insert the object into the original individual. The original individual is an array that all the elements are false. So using a random number generator to generate a number smaller then the number of the objects then set the value to true. Below is the code:
+> The population is a two-dimensional array. For example population[i][j], i represent it is which individual. In this project, we set a parameter called scale to define the size of the population. The rule to generate a population is that generate an individual until the number of the individual equals the scale. The rule to generate an individual is that insert the object into the original individual. The original individual is an array that all the elements are false. So using a random number generator to generate a number smaller than the number of the objects then set the value to true. Below is the code:
 
     public void initPopulation() {  
         fitness = new float[scale];  
@@ -40,7 +40,7 @@
 > Specially, in order to avoid that insert a too large object at first and insert too many small objects into the bag we set the capacity from 0.5*capacity to 1.5*capacity.
 
 ### Calculate the fitness of each individual in the population
-> The fitness function is the sum of all the objects' profit so it just to interate all the individual and calculate the sum of each.
+> The fitness function is the sum of all the objects' profit so it just to iterate all the individual and calculate the sum of each.
 Below is the code:
 
      private float evaluate(boolean[] unit) {  
@@ -138,7 +138,7 @@ Below is the code:
     }  
   
 ### Crossover 
-> We define a parameter called irate to define the probability of the crossover. So we interate every element of two individual, if the random number is smaller than the irate it will exchange the two element in the two individual.Below is code:
+> We define a parameter called irate to define the probability of the crossover. So we iterate every element of two individual if the random number is smaller than the irate it will exchange the two element in the two individuals.Below is the code:
 
     private void intersect() {  
         for(int i = 0; i < scale; i = i + 2)  
@@ -168,7 +168,7 @@ Below is the code:
     }  
     
 ### The process of the evolution
-> First initpopulation, then calculate the fitness and record the best fitness. Second select the best individual. Third intersect and mutate. Repeat those processes until it arrives the maximum generation.Below is the code:
+> First initpopulation, then calculate the fitness and record the best fitness. Second, select the best individual. Third, intersect and mutate. Repeat those processes until it arrives the maximum generation.Below is the code:
 
      public void solve() {  
         readDate();  
