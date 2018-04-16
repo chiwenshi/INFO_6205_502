@@ -6,7 +6,7 @@
 > Attention: you should click the confirm button twice to see the diagram.
 
 ## Installation
-    Download AlgorithmOfFinalProject to your laptop, and in the Eclipse EE, 
+    Download GA_Project to your laptop, and in the Eclipse EE, 
     import this file folder by Maven, select Existing Maven Project, and select this folder.
     And then, download Tomcat 9.0, configure local serve, run the project on the server by Tomcat 9.0.
     This time, please use Chrome to open given url http://localhost:8080/AlgorithmOfFinalProject/
