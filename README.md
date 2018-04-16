@@ -191,7 +191,7 @@ Below is the code:
 
 > You can alert each parameter and view the result from the chart.
 
-> Attention: you should click the confirm button twice at first.
+> Attention: you should click the confirm button twice to see the diagram.
 
 ## Installation
     Download AlgorithmOfFinalProject to your laptop, and in the Eclipse EE, 
