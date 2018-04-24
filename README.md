@@ -6,11 +6,10 @@
 > Attention: you should click the confirm button twice to see the diagram.
 
 ## Installation
-    Download AlgorithmOfFinalProject to your laptop, and in the Eclipse EE, 
-    import this file folder by Maven, select Existing Maven Project, and select this folder.
-    And then, download Tomcat 9.0, configure local serve, run the project on the server by Tomcat 9.0.
-    This time, please use Chrome to open given url http://localhost:8080/AlgorithmOfFinalProject/
-    Alternatively, you can directly access to our site: https://webapp-180415180624.azurewebsites.net/
+> Download GA_Project to your laptop, and in the Eclipse EE, import this file folder by Maven, select Existing Maven Project, and select this folder.
+> And then, download Tomcat 9.0, configure local serve, run the project on the server by Tomcat 9.0.
+> This time, please use Chrome to open given url http://localhost:8080/GA_Project/
+> Alternatively, you can directly access to our site: https://webapp-180415180624.azurewebsites.net/
 
 # Knapsack Problem
 > The knapsack problem is a problem in combinatorial optimization: Given a set of items, each with a weight and a value, determine the number of each item to include in a collection so that the total weight is less than or equal to a given limit and the total weight is less than or equal to a given limit and the total value is as large as possible. In other words, we are trying to fill a fixed-size knapsack with the most valuable items. 
