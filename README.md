@@ -12,7 +12,7 @@
 > Alternatively, you can directly access to our site: https://webapp-180415180624.azurewebsites.net/
 
 # Knapsack Problem
-> The knapsack problem is a problem in combinatorial optimization: Given a set of items, each with a weight and a value, determine the number of each item to include in a collection so that the total weight is less than or equal to a given limit and the total weight is less than or equal to a given limit and the total value is as large as possible. In other words, we are trying to fill a fixed-size knapsack with the most valuable items. 
+> The knapsack problem is a problem in combinatorial optimization: Given a set of items, each with a weight and a value, determine the number of each item to include in a collection so that the total weight is less than or equal to a given limit and the total value is as large as possible. In other words, we are trying to fill a fixed-size knapsack with the most valuable items. 
 
 ## Genotype
 > In this problem we use the boolean array as the genotype. The length of the array is the number of the object read by the project at first. 
@@ -20,7 +20,7 @@
 ## Phenotype
 > The boolean array represent each object is or not in the bag. For example, if the array[0] is true, it means that the first object put into the bag. On the contrary, if array[0] is false, it means that the first object doesn't put into the bag.
 
-## Fintness Fuction
+## Fitness Function
 > According to the knapsack problem, it wants to output the max profit of the objects in the bag. So the fitness function is the sum of the object's profit which is in the bag.
 
 ## The logic of the evolution steps
